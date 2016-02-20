@@ -8,4 +8,4 @@ The goal is to take an input video and produce a summary of it as a GIF.
 
 ### Data Source
 
-Data was provided by (Yahoo's Webscope Program)[https://webscope.sandbox.yahoo.com/].
+Data was provided by [Yahoo's Webscope Program](https://webscope.sandbox.yahoo.com/)

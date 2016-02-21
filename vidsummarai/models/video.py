@@ -9,7 +9,8 @@ class Video(object):
     def __init__(self, video_info, ratings):
         """Initialize Video object.
         
-        :param video_info: list containing [genre, video_id, title, url, duration]
+        :param video_info: list containing [genre, video_id, 
+                                            title, url, duration]
         :param ratings: list of lists containing ratings
         """
         
@@ -75,17 +76,15 @@ class Video(object):
     def _get_flattened_samples(self):
         """Flatten the samples into one Nx1 np array"""
         
-        flattened_list = [item for sublist in self.samples for item in sublist]
-        return np.reshape(np.array(flattened_list), (-1, 1))
+        flattened = [item for sublist in self.samples for item in sublist]
+        return np.reshape(np.array(flattened), (-1, 1))
     
     def X(self):
         """Return Sample Locations (X in a model)"""
-        
         return self.sample_locations
     
     def Y(self):
         """Return Sample Data (Y in a model)"""
-        
         return self.sample_data
     
     def fit_gaussian_process(self, variance=2.29, lengthscale=60.0):
@@ -94,8 +93,10 @@ class Video(object):
         :param variance: float - The Variance of the RBF Kernel
         :param lengthscale: float - The lengthscale of the RBF Kernel
         """
-        kernel = GPy.kern.RBF(input_dim=1, variance=variance, lengthscale=lengthscale)
-        self.gp = GPy.models.GPRegression(self.sample_locations, self.sample_data, kernel)
+        kernel = GPy.kern.RBF(input_dim=1, variance=variance,
+                              lengthscale=lengthscale)
+        self.gp = GPy.models.GPRegression(self.sample_locations,
+                                          self.sample_data, kernel)
         
         
     def plot_gaussian_process(self):
@@ -106,3 +107,13 @@ class Video(object):
         fig = self.gp.plot()
 
         return fig
+
+    def __str__(self):
+        """Overload the str class to print it a certain way"""
+        return """
+        Video Title: {}
+        Video Id: {}
+        Video Url: {}
+        Video Duration: {}
+        Video Genre: {}
+        """.format(self.title, self.id, self.url, self.duration, self.genre)

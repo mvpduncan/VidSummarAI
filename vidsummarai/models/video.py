@@ -117,3 +117,30 @@ class Video(object):
         Video Duration: {}
         Video Genre: {}
         """.format(self.title, self.id, self.url, self.duration, self.genre)
+
+    def plot_predictions(self):
+        """Plot the predicted values of each frame"""
+        length = self.sample_locations.max()
+        Xp = np.resize(np.array(range(length)), (-1, 1))
+
+        # Get mean and variance
+        mu, var = self.gp.predict(Xp,full_cov=False)
+
+        # Get lower and upper bounds
+        lower = mu - var
+        upper = mu + var
+
+        # Reshape arrays to work with fill_between
+        lower = lower.flatten()
+        upper = upper.flatten()
+        mu = mu.flatten()
+        Xp = Xp.flatten()
+
+        # Do the plotting
+        plt.plot(mu)
+        plt.plot(lower)
+        plt.plot(upper)
+        plt.fill_between(Xp, upper, lower, color='#C5D3E7', alpha=0.5)
+        plt.title("Predicted Frame Importance")
+        plt.ylabel("Frame Importance")
+        plt.xlabel("Frame")

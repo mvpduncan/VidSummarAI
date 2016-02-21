@@ -13,3 +13,15 @@ Data was provided by [Yahoo's Webscope Program](https://webscope.sandbox.yahoo.c
 
     explore/ - Ipython Notebooks to explore the data and play with ideas
     vidsummarai/ - Code for data manipulation, model fitting, etc.
+
+### Usage
+
+Currently we are just exploring the data and devising a plan. In the future
+there will be a set of tools under vidsummarai/ that will be controlled
+by a CLI, allowing you to create a summary of a video.
+
+Question:
+
+    Do we want to seperate out training/exploring and creation
+    into seperate projects? Or can we house all the code in this
+    repository?

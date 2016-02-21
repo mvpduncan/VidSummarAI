@@ -12,4 +12,4 @@ Data was provided by [Yahoo's Webscope Program](https://webscope.sandbox.yahoo.c
 
 
     explore/ - Ipython Notebooks to explore the data and play with ideas
-
+    vidsummarai/ - Code for data manipulation, model fitting, etc.

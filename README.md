@@ -20,8 +20,8 @@ Currently we are just exploring the data and devising a plan. In the future
 there will be a set of tools under vidsummarai/ that will be controlled
 by a CLI, allowing you to create a summary of a video.
 
-Question:
+__Question__:
 
-    Do we want to seperate out training/exploring and creation
-    into seperate projects? Or can we house all the code in this
-    repository?
+Do we want to seperate out training/exploring and creation
+into seperate projects? Or can we house all the code in this
+repository?

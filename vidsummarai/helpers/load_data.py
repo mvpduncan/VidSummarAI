@@ -1,4 +1,22 @@
-from ..models import Video
+from ..models.video import Video
+
+
+def get_video_objects(video_info_path, video_anno_path):
+    """Given both the video info path and the video annotation path
+       create all the video objects and return them
+
+    :param video_info_path: str - Path to video info tsv file
+    :param video_anno_path: str - Path to video annotation tsv file
+    """
+    
+    _, video_info = read_tsv(video_info_path)
+    _, anno_data = read_tsv(video_anno_path)
+
+    video_mapping = get_video_data_mapping(video_info)
+    rating_mapping = get_rating_data_mapping(anno_data)
+
+    return create_videos_from_mappings(video_mapping, rating_mapping)
+
 
 def read_tsv(path):
     """Given a file path to a tsv, return the header and data"""
@@ -18,7 +36,7 @@ def get_video_data_mapping(video_info):
 
     :param video_info: list - [genre, id, title, url, duration]
     """
-    
+
     video_info_mapping = {}
     for info in video_info:
         video_info_mapping[info[1]] = info
@@ -46,7 +64,7 @@ def get_rating_data_mapping(annotation_data):
     return rating_data
 
 
-def get_video_objects(video_mapping, rating_mapping):
+def create_videos_from_mappings(video_mapping, rating_mapping):
     """Given both mappings for video info and ratings, create
        a list of video objects
 
@@ -55,8 +73,8 @@ def get_video_objects(video_mapping, rating_mapping):
     """
     
     videos = []
-    for video_id, ratings in rating_data.items():
-        video = Video(video_info_mapping[video_id], ratings)
+    for video_id, ratings in rating_mapping.items():
+        video = Video(video_mapping[video_id], ratings)
         videos.append(video)
 
     return videos

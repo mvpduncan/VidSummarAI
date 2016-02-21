@@ -88,7 +88,7 @@ class Video(object):
         
         return self.sample_data
     
-    def fit_gaussian_process(self, variance=2.29, lengthscale=60.0)
+    def fit_gaussian_process(self, variance=2.29, lengthscale=60.0):
         """Fit a Gaussian Process with an RBF Kernel for our rating data.
         
         :param variance: float - The Variance of the RBF Kernel

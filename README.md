@@ -1,6 +1,6 @@
 # VidSummarAI
 
-This is an ongoing project trying to build a video summarization algorithm for the LDV Vision Competition.
+This is an ongoing project trying to build a video summarization algorithm for the [LDV Vision Competition](http://www.ldv.co/visionsummit/2016/competitions/entrepreneurial-computer-vision-challenges).
 
 The goal is to take an input video and produce a summary of it as a GIF.
 

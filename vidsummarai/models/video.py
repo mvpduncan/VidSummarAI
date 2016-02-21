@@ -88,30 +88,21 @@ class Video(object):
         
         return self.sample_data
     
-    def fit_gaussian_process(self, variance=2.29, lengthscale=60.0, 
-                             print_gp = True, optimize=False):
+    def fit_gaussian_process(self, variance=2.29, lengthscale=60.0)
         """Fit a Gaussian Process with an RBF Kernel for our rating data.
         
         :param variance: float - The Variance of the RBF Kernel
         :param lengthscale: float - The lengthscale of the RBF Kernel
-        :param print_gp: bool (Default=True) - Prints GP information
-        :param optimize: bool (Default=False) - Optimizes GP to minimize
-                                                loglikelyhood by modifying
-                                                Variance and Lengthscale of
-                                                kernel.
-        
         """
         kernel = GPy.kern.RBF(input_dim=1, variance=variance, lengthscale=lengthscale)
         self.gp = GPy.models.GPRegression(self.sample_locations, self.sample_data, kernel)
         
-        if optimize:
-            self.gp.optimize(messages=False)
-        if print_gp:
-            print self.gp
         
     def plot_gaussian_process(self):
         """Plots Gaussian Process."""
         if not self.gp:
             print "Please call fit_gaussian_process first."
             return
-        fig = gp.plot()
+        fig = self.gp.plot()
+
+        return fig

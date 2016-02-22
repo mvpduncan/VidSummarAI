@@ -37,6 +37,10 @@ class Video(object):
         # Kernel Params
         self.kernel_variance = 2.29
         self.lengthscale = 60.0
+
+        # GP predicted mu and variance
+        self.gp_mu = None
+        self.gp_var = None
         
         
     def _sample_ratings(self):
@@ -118,6 +122,7 @@ class Video(object):
         Video Genre: {}
         """.format(self.title, self.id, self.url, self.duration, self.genre)
 
+
     def plot_predictions(self):
         """Plot the predicted values of each frame"""
         length = self.sample_locations.max()
@@ -125,6 +130,10 @@ class Video(object):
 
         # Get mean and variance
         mu, var = self.gp.predict(Xp,full_cov=False)
+
+        # Save mu and var
+        self.gp_mu = mu
+        self.gp_var = var
 
         # Get lower and upper bounds
         lower = mu - var
